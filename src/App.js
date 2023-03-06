@@ -1,44 +1,50 @@
+import React from 'react';
+import { Security, LoginCallback } from '@okta/okta-react';
+import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Home from './Home';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import { useState } from 'react';
 
-export default function App(props) {
+
+const oktaAuth = new OktaAuth({
+    issuer: 'https://dev-33349446.okta.com/oauth2/default',
+    clientId: '0oa8l8s5fdtUKHV9H5d7',
+    redirectUri: window.location.origin + '/login/callback'
+});
+
+export default function App(props)  {
+
+    const navigate = useNavigate();
+      const restoreOriginalUri = async (_oktaAuth, originalUri) => {
+        console.log('here I am');
+        console.log(_oktaAuth.isAuthenticated());
+        navigate('/');
+      };
 
     const [display, setDisplay] = useState(logo);
     const [displayClass, setDisplayClass] = useState('App-logo');
     const [buttonText, setButtonText] = useState('Initialise Freactal');
     const [displayState, setDisplayState] = useState(false);
 
-  function handleClick() {
 
-    axios.get('http://localhost:8080/api/init')
-        .then(function(response) {
-            if (displayState) {
-                console.log('on');
-                setDisplay(logo);
-                setDisplayClass('App-logo');
-                setButtonText('Initialise Freactal');
-            } else {
-                console.log('off');
-                setDisplay(`data:image/jpg;base64,${response.data.encodedImage}`);
-                setDisplayClass('fractal-display');
-                setButtonText('Go React!');
-            }
-            setDisplayState(!displayState);
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
-
-  }
 
 
   return (
     <div className="App">
+
+        <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
+        <Routes>
+            <Route path='/' exact={true} element=<Home /> />
+            <Route path='/login/callback' element=<LoginCallback /> />
+        </Routes>
+        </Security>
+
+
       <header className="App-header">
         <img src={display} className={displayClass} alt="logo" />
-        <button onClick={handleClick}>{buttonText}</button>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -53,6 +59,6 @@ export default function App(props) {
       </header>
     </div>
   );
-}
+};
 
 

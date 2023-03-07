@@ -2,6 +2,7 @@ import { useOktaAuth } from '@okta/okta-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
+import ZoomCard from './ZoomCard';
 
 const Home = () => {
 
@@ -12,6 +13,7 @@ const Home = () => {
     const [zoomName, setZoomName] = useState(null);
     const [realRange, setRealRange] = useState(null);
     const [iRange, setiRange] = useState(null);
+    const [zooms, setZooms] = useState([]);
 
     const login = async () => oktaAuth.signInWithRedirect();
     const logout = async () => oktaAuth.signOut('/');
@@ -32,6 +34,12 @@ const Home = () => {
                         setZoomName(response.data.zoom.name);
                         setRealRange(`${response.data.zoom.realMin} to ${response.data.zoom.realMax}`);
                         setiRange(`${response.data.zoom.imaginaryMin} to ${response.data.zoom.imaginaryMax}`);
+
+
+                        const newZooms= zooms.slice();
+                        newZooms.push(<div>hello</div>);
+                        setZooms(newZooms);
+
                     })
                     .catch(function(error) {
                         console.log(error);
@@ -67,12 +75,7 @@ const Home = () => {
                 <div id="zooms-panel-wrapper">
                     <div id="zooms-panel">
                         <div className="zoom-wrapper">
-                            <div className="zoom-index">0.</div>
-                            <div className="zoom-card">
-                                <div className="zoom-card-name">{zoomName}</div>
-                                <div className="zoom-card-real">{realRange}</div>
-                                <div className="zoom-card-imaginary">{iRange}</div>
-                            </div>
+                            {zooms}
                         </div>
                     </div>
                 </div>

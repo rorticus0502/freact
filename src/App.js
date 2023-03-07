@@ -15,8 +15,6 @@ export default function App(props)  {
 
     const navigate = useNavigate();
       const restoreOriginalUri = async (_oktaAuth, originalUri) => {
-        console.log('here I am');
-        console.log(_oktaAuth.isAuthenticated());
         navigate('/');
       };
 

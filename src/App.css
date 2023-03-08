@@ -34,13 +34,15 @@
     grid-row-end: 3;
     border: 3px solid #ffc107;
     border-radius: 6px;
+    padding: 10px 25px 0px 10px;
 }
 
 .zoom-wrapper {
 
     display: grid;
     grid-template-columns: 10% 90%;
-    grid-template-rows: 13% 60% 27%
+    grid-template-rows: 13% 60% 27%;
+    grid-column-gap: 3px;
 
 }
 .zoom-index {
@@ -58,6 +60,8 @@
     margin: auto;
     grid-row-start: 1;
     grid-row-end: 4;
+    padding: 3px 10px;
+    color: #0d6efd;
 
 }
 

@@ -4,15 +4,27 @@ import axios from 'axios';
 import logo from './logo.svg';
 import ZoomCard from './ZoomCard';
 
+const buildAZoom = (zoom) => {
+
+    return (
+        <div className="zoom-wrapper">
+            <div className="zoom-index">0.</div>
+            <div className="zoom-card">
+                <div className="zoom-card-name">{zoom.name}</div>
+                <div className="zoom-card-real">{zoom.realMin} to {zoom.realMax}</div>
+                <div className="zoom-card-imaginary">{zoom.imaginaryMin} to {zoom.imaginaryMax}</div>
+            </div>
+        </div>
+    );
+
+}
+
 const Home = () => {
 
     const { authState, oktaAuth } = useOktaAuth();
     const [accessToken, setAccessToken] = useState(null);
     const [display, setDisplay] = useState(logo);
     const [displayClass, setDisplayClass] = useState('App-logo');
-    const [zoomName, setZoomName] = useState(null);
-    const [realRange, setRealRange] = useState(null);
-    const [iRange, setiRange] = useState(null);
     const [zooms, setZooms] = useState([]);
 
     const login = async () => oktaAuth.signInWithRedirect();
@@ -31,13 +43,9 @@ const Home = () => {
                         console.log(response);
                         setDisplay(`data:image/jpg;base64,${response.data.encodedImage}`);
                         setDisplayClass('fractal-display');
-                        setZoomName(response.data.zoom.name);
-                        setRealRange(`${response.data.zoom.realMin} to ${response.data.zoom.realMax}`);
-                        setiRange(`${response.data.zoom.imaginaryMin} to ${response.data.zoom.imaginaryMax}`);
-
 
                         const newZooms= zooms.slice();
-                        newZooms.push(<div>hello</div>);
+                        newZooms.push(buildAZoom(response.data.zoom));
                         setZooms(newZooms);
 
                     })
@@ -74,9 +82,7 @@ const Home = () => {
                 </div>
                 <div id="zooms-panel-wrapper">
                     <div id="zooms-panel">
-                        <div className="zoom-wrapper">
-                            {zooms}
-                        </div>
+                        {zooms}
                     </div>
                 </div>
             </div>

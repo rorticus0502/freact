@@ -3,15 +3,14 @@
 }
 
 .App-logo {
-  height: 900px;
-  width: 1200px;
+  height: 300px;
+  width: 300px;
   pointer-events: none;
 }
 
 .fractal-display {
   height: 900px;
   width: 1200px;
-  pointer-events: none;
 }
 
 #mandelbrot-wrapper {

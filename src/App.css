@@ -3,14 +3,65 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 300px;
+  width: 300px;
   pointer-events: none;
 }
 
 .fractal-display {
   height: 900px;
   width: 1200px;
-  pointer-events: none;
+}
+
+#mandelbrot-wrapper {
+
+    display: grid;
+    grid-row-gap: 20px;
+    max-width: 94%;
+    margin: 20px auto;
+
+}
+
+#fractal-wrapper {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    margin: auto;
+}
+
+#zooms-panel-wrapper {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    border: 3px solid #ffc107;
+    border-radius: 6px;
+    padding: 10px 25px 0px 10px;
+}
+
+.zoom-wrapper {
+
+    display: grid;
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 13% 60% 27%;
+    grid-column-gap: 3px;
+
+}
+.zoom-index {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.zoom-card {
+
+    border: 2px solid #0d6efd;
+    border-radius: 6px;
+    background-color: #ffc107;
+    margin: auto;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    padding: 3px 10px;
+    color: #0d6efd;
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -26,7 +77,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 

@@ -4,21 +4,6 @@ import axios from 'axios';
 import logo from './logo.svg';
 import ZoomCard from './ZoomCard';
 
-const buildAZoom = (zoom) => {
-
-    return (
-        <div className="zoom-wrapper">
-            <div className="zoom-index">0.</div>
-            <div className="zoom-card">
-                <div className="zoom-card-name">{zoom.name}</div>
-                <div className="zoom-card-real">{zoom.realMin} to {zoom.realMax}</div>
-                <div className="zoom-card-imaginary">{zoom.imaginaryMin} to {zoom.imaginaryMax}</div>
-            </div>
-        </div>
-    );
-
-}
-
 const Home = () => {
 
     const { authState, oktaAuth } = useOktaAuth();
@@ -76,6 +61,21 @@ const Home = () => {
         zoom();
     }
 
+    const buildAZoom = (zoom) => {
+
+        return (
+            <div className="zoom-wrapper" onClick={() => reloadZoom(zoom)}>
+                <div className="zoom-index">{zooms.length}.</div>
+                <div className="zoom-card">
+                    <div className="zoom-card-name">{zoom.name}</div>
+                    <div className="zoom-card-real">{zoom.realMin} to {zoom.realMax}</div>
+                    <div className="zoom-card-imaginary">{zoom.imaginaryMin} to {zoom.imaginaryMax}</div>
+                </div>
+            </div>
+        );
+
+    }
+
     const zoom = () => {
 
         const config = {
@@ -115,8 +115,43 @@ const Home = () => {
         });
     }
 
+    const reloadZoom = (oldZoom) => {
+
+        console.log('hello');
+
+        const config = {
+            headers: {
+                Authorization: 'Bearer ' + accessToken
+            }
+        }
+
+        var params = new URLSearchParams();
+
+        params.append('minr', oldZoom.realMin);
+        params.append('maxr', oldZoom.realMax);
+        params.append('mini', oldZoom.imaginaryMin);
+        params.append('maxi', oldZoom.imaginaryMax);
+
+        var zoomUrl = 'http://localhost:8080/api/reload?' + params.toString();
+
+        axios.get(zoomUrl, config)
+        .then(function(response) {
+            setDisplay(`data:image/jpg;base64,${response.data.encodedImage}`);
+            setDisplayClass('fractal-display');
+
+            setMinr([response.data.zoom.realMin]);
+            setMaxr([response.data.zoom.realMax]);
+            setMini([response.data.zoom.imaginaryMin]);
+            setMaxi([response.data.zoom.imaginaryMax]);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+
+    }
+
     return (
-        <div class="App-header">
+        <div className="App-header">
             <button onClick={zoom}>Whatsitnow</button>
             <button onClick={logout}>Logout</button>
             <div id="mandelbrot-wrapper">

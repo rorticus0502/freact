@@ -64,7 +64,7 @@ const Home = () => {
     const buildAZoom = (zoom) => {
 
         return (
-            <div className="zoom-wrapper" onClick={() => reloadZoom(zoom)}>
+            <div className="zoom-wrapper" key={zooms.length} onClick={() => reloadZoom(zoom)}>
                 <div className="zoom-index">{zooms.length}.</div>
                 <div className="zoom-card">
                     <div className="zoom-card-name">{zoom.name}</div>

@@ -62,6 +62,11 @@ const Home = () => {
         zoom();
     }
 
+    const zoomPanelStyle = () => {
+
+        return zooms.length ? 'with-zooms' : 'without-zooms';
+    }
+
     const buildAZoom = (zoom) => {
 
         return (
@@ -74,7 +79,6 @@ const Home = () => {
                 </div>
             </div>
         );
-
     }
 
     const zoom = () => {
@@ -169,7 +173,7 @@ const Home = () => {
                     <img src={display} className={displayClass} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
                 </div>
                 <div id="zooms-panel-wrapper">
-                    <div id="zooms-panel">
+                    <div id="zooms-panel" className={zoomPanelStyle()}>
                         {zooms}
                     </div>
                 </div>

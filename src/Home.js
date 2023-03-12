@@ -19,6 +19,7 @@ const Home = () => {
     const [maxr, setMaxr] = useState([1.0]);
     const [mini, setMini] = useState([-1.5]);
     const [maxi, setMaxi] = useState([1.5]);
+    const [ogScheme, setOgScheme] = useState(false);
 
     const login = async () => oktaAuth.signInWithRedirect();
     const logout = async () => oktaAuth.signOut('/');
@@ -95,6 +96,10 @@ const Home = () => {
         params.append('mini', mini[0]);
         params.append('maxi', maxi[0]);
 
+        if(ogScheme) {
+            params.append('og', true);
+        }
+
         var zoomUrl = 'http://localhost:8080/api/zoom?' + params.toString();
 
         axios.get(zoomUrl, config)
@@ -147,12 +152,17 @@ const Home = () => {
         .catch(function(error) {
             console.log(error);
         });
-
     }
 
     return (
         <div className="App-header">
             <button onClick={zoom}>Whatsitnow</button>
+            <div>
+                <input type="radio" value="og" checked={ogScheme} onClick={() => setOgScheme(true)} />
+                <label>OG</label>
+                <input type="radio" value="latest" checked={!ogScheme} onClick={() => setOgScheme(false)} />
+                <label>Latest</label>
+            </div>
             <button onClick={logout}>Logout</button>
             <div id="mandelbrot-wrapper">
                 <div id="fractal-wrapper">

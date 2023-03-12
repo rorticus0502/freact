@@ -160,21 +160,33 @@ const Home = () => {
 
     return (
         <div className="App-header">
-            <button onClick={zoom}>Whatsitnow</button>
-            <div>
-                <input type="radio" value="og" checked={ogScheme} onClick={() => setOgScheme(true)} />
-                <label>OG</label>
-                <input type="radio" value="latest" checked={!ogScheme} onClick={() => setOgScheme(false)} />
-                <label>Latest</label>
+            <div className="navbar">
+                <button onClick={logout}>Logout</button>
             </div>
-            <button onClick={logout}>Logout</button>
-            <div id="mandelbrot-wrapper">
-                <div id="fractal-wrapper">
-                    <img src={display} className={displayClass} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
+            <div className="generator-display">
+                <button onClick={zoom}>Begin</button>
+                <div>
+                    <input type="radio" value="og" checked={ogScheme} onClick={() => setOgScheme(true)} />
+                    <label>OG</label>
+                    <input type="radio" value="latest" checked={!ogScheme} onClick={() => setOgScheme(false)} />
+                    <label>Latest</label>
                 </div>
-                <div id="zooms-panel-wrapper">
-                    <div id="zooms-panel" className={zoomPanelStyle()}>
-                        {zooms}
+
+                <div>
+                    <p>To generate the full Mandelbrot Set click the begin button above. Then use your mouse to zoom in.</p>
+                    It can take upto 10 seconds to generate the image.
+
+                    <p>Use the radio buttons to select your color scheme.</p>
+                </div>
+
+                <div id="mandelbrot-wrapper">
+                    <div id="fractal-wrapper">
+                        <img src={display} className={displayClass} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
+                    </div>
+                    <div id="zooms-panel-wrapper">
+                        <div id="zooms-panel" className={zoomPanelStyle()}>
+                            {zooms}
+                        </div>
                     </div>
                 </div>
             </div>

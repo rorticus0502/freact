@@ -79,6 +79,14 @@
 
 .App-header {
   background-color: #282c34;
+  color: white;
+}
+
+.navbar button {
+    float: right;
+}
+
+.generator-display {
   min-height: 100vh;
   display: flex;
   flex-direction: column;

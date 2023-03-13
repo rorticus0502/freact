@@ -19,6 +19,7 @@ const Home = () => {
     const [maxr, setMaxr] = useState([1.0]);
     const [mini, setMini] = useState([-1.5]);
     const [maxi, setMaxi] = useState([1.5]);
+    const [ogScheme, setOgScheme] = useState(false);
 
     const login = async () => oktaAuth.signInWithRedirect();
     const logout = async () => oktaAuth.signOut('/');
@@ -61,6 +62,11 @@ const Home = () => {
         zoom();
     }
 
+    const zoomPanelStyle = () => {
+
+        return zooms.length ? 'with-zooms' : 'without-zooms';
+    }
+
     const buildAZoom = (zoom) => {
 
         return (
@@ -73,7 +79,6 @@ const Home = () => {
                 </div>
             </div>
         );
-
     }
 
     const zoom = () => {
@@ -94,6 +99,10 @@ const Home = () => {
         params.append('maxr', maxr[0]);
         params.append('mini', mini[0]);
         params.append('maxi', maxi[0]);
+
+        if(ogScheme) {
+            params.append('og', true);
+        }
 
         var zoomUrl = 'http://localhost:8080/api/zoom?' + params.toString();
 
@@ -147,20 +156,37 @@ const Home = () => {
         .catch(function(error) {
             console.log(error);
         });
-
     }
 
     return (
         <div className="App-header">
-            <button onClick={zoom}>Whatsitnow</button>
-            <button onClick={logout}>Logout</button>
-            <div id="mandelbrot-wrapper">
-                <div id="fractal-wrapper">
-                    <img src={display} className={displayClass} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
+            <div className="navbar">
+                <button onClick={logout}>Logout</button>
+            </div>
+            <div className="generator-display">
+                <button onClick={zoom}>Begin</button>
+                <div>
+                    <input type="radio" value="og" checked={ogScheme} onClick={() => setOgScheme(true)} />
+                    <label>OG</label>
+                    <input type="radio" value="latest" checked={!ogScheme} onClick={() => setOgScheme(false)} />
+                    <label>Latest</label>
                 </div>
-                <div id="zooms-panel-wrapper">
-                    <div id="zooms-panel">
-                        {zooms}
+
+                <div>
+                    <p>To generate the full Mandelbrot Set click the begin button above. Then use your mouse to zoom in.</p>
+                    It can take upto 10 seconds to generate the image.
+
+                    <p>Use the radio buttons to select your color scheme.</p>
+                </div>
+
+                <div id="mandelbrot-wrapper">
+                    <div id="fractal-wrapper">
+                        <img src={display} className={displayClass} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
+                    </div>
+                    <div id="zooms-panel-wrapper">
+                        <div id="zooms-panel" className={zoomPanelStyle()}>
+                            {zooms}
+                        </div>
                     </div>
                 </div>
             </div>

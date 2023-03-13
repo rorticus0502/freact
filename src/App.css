@@ -31,9 +31,16 @@
 #zooms-panel-wrapper {
     grid-row-start: 2;
     grid-row-end: 3;
+}
+
+.with-zooms {
     border: 3px solid #ffc107;
     border-radius: 6px;
     padding: 10px 25px 0px 10px;
+}
+
+.without-zooms {
+    display: none;
 }
 
 .zoom-wrapper {
@@ -72,6 +79,14 @@
 
 .App-header {
   background-color: #282c34;
+  color: white;
+}
+
+.navbar button {
+    float: right;
+}
+
+.generator-display {
   min-height: 100vh;
   display: flex;
   flex-direction: column;

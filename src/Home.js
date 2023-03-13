@@ -138,6 +138,9 @@ const Home = () => {
         <div className="App-header">
             <NavBar />
             <div className="generator-display">
+                <div className="tagline">
+                    Create your own beautiful and unique art.
+                </div>
                 <button onClick={zoom}>Begin</button>
                 <div>
                     <input type="radio" value="og" checked={ogScheme} onChange={() => setOgScheme(!ogScheme)} />

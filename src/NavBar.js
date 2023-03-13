@@ -1,5 +1,5 @@
 import { useOktaAuth } from '@okta/okta-react';
-import logo from './vsm-icon.jpg';
+import logo from './nav-icon.jpg';
 
 const NavBar = () => {
 

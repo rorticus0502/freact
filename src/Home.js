@@ -149,19 +149,25 @@ const Home = () => {
                 <div className="tagline">
                     Create your own beautiful and unique art.
                 </div>
-                <button onClick={zoom}>Begin</button>
-                <div>
-                    <input type="radio" value="og" checked={ogScheme} onChange={() => setOgScheme(!ogScheme)} />
-                    <label>OG</label>
-                    <input type="radio" value="latest" checked={!ogScheme} onChange={() => setOgScheme(!ogScheme)} />
-                    <label>Latest</label>
-                </div>
 
                 <div id="mandelbrot-wrapper">
                     <div id="fractal-wrapper">
                         <img src={display} className={displayStyle} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
                     </div>
                     {zooms.length > 0 && <ZoomPanel zooms={zooms} reload={reloadZoom} />}
+                </div>
+                <div id="control-panel">
+                    <div>
+                        <button onClick={zoom}>Begin</button>
+                    </div>
+                    <div>
+                        <input type="radio" value="og" checked={ogScheme} onChange={() => setOgScheme(!ogScheme)} />
+                        <label>OG</label>
+                    </div>
+                    <div>
+                        <input type="radio" value="latest" checked={!ogScheme} onChange={() => setOgScheme(!ogScheme)} />
+                        <label>Latest</label>
+                    </div>
                 </div>
             </div>
         </div>

@@ -24,6 +24,28 @@
   width: 800px;
 }
 
+#intro-wrapper {
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+}
+
+.intro-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    border: 4px solid #ffc107;
+    border-radius: 8px;
+    height: 600px;
+    width: 100%;
+    font-size: 1.5rem;
+    font-family: serif;
+}
+
+#intro-info-right {
+    font-family: math;
+}
+
 #mandelbrot-wrapper {
 
     display: grid;

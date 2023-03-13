@@ -2,6 +2,7 @@ import { useOktaAuth } from '@okta/okta-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
+import NavBar from './NavBar';
 import ZoomPanel from './ZoomPanel';
 
 const Home = () => {
@@ -22,7 +23,6 @@ const Home = () => {
     const [ogScheme, setOgScheme] = useState(false);
 
     const login = async () => oktaAuth.signInWithRedirect();
-    const logout = async () => oktaAuth.signOut('/');
 
     useEffect(() => {
 
@@ -46,9 +46,6 @@ const Home = () => {
 
         topLeftX[0] = event.nativeEvent.offsetX;
         topLeftY[0] = event.nativeEvent.offsetY;
-
-        console.log(`mouse down ${event.nativeEvent.offsetX} ${event.nativeEvent.offsetY}`);
-
     }
 
     const handleMouseRelease = (event) => {
@@ -56,8 +53,6 @@ const Home = () => {
 
         bottomRightX[0] = event.nativeEvent.offsetX;
         bottomRightY[0] = event.nativeEvent.offsetY;
-
-        console.log(`mouse release ${event.nativeEvent.offsetX} ${event.nativeEvent.offsetY}`);
 
         zoom();
     }
@@ -109,8 +104,6 @@ const Home = () => {
 
     const reloadZoom = (oldZoom) => {
 
-        console.log('hello');
-
         const config = {
             headers: {
                 Authorization: 'Bearer ' + accessToken
@@ -143,9 +136,7 @@ const Home = () => {
 
     return (
         <div className="App-header">
-            <div className="navbar">
-                <button onClick={logout}>Logout</button>
-            </div>
+            <NavBar />
             <div className="generator-display">
                 <button onClick={zoom}>Begin</button>
                 <div>
@@ -172,7 +163,6 @@ const Home = () => {
         </div>
 
     );
-
 };
 
 export default Home;

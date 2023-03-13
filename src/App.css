@@ -74,12 +74,31 @@
 }
 
 .App-header {
+    padding-top: 5px;
   background-color: #282c34;
   color: white;
 }
 
-.navbar button {
-    float: right;
+#navbar {
+    min-height: 5vh;
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    background-color: #00E6E6FF;
+}
+
+#navbar button {
+    margin: 10px 35px;
+}
+
+#navbar #app-title {
+    grid-column-start: 5;
+    grid-column-end: 6;
+    margin: auto;
+    font-size: 3rem;
+}
+
+#navbar .first-nav-btn {
+    grid-column-start: 9;
 }
 
 .generator-display {

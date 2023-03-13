@@ -1,5 +1,3 @@
-import useState from 'react';
-
 const ZoomPanel = ({zooms, reload}) => {
 
     const zoomElements = zooms.map(zoom =>

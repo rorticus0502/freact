@@ -19,6 +19,11 @@
   width: 1200px;
 }
 
+.init-style {
+  height: 600px;
+  width: 800px;
+}
+
 #mandelbrot-wrapper {
 
     display: grid;

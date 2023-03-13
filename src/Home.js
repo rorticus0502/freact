@@ -1,7 +1,7 @@
 import { useOktaAuth } from '@okta/okta-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
+import initImage from './init-image.jpg';
 import NavBar from './NavBar';
 import ZoomPanel from './ZoomPanel';
 
@@ -9,8 +9,8 @@ const Home = () => {
 
     const { authState, oktaAuth } = useOktaAuth();
     const [accessToken, setAccessToken] = useState(null);
-    const [display, setDisplay] = useState(logo);
-    const [displayClass, setDisplayClass] = useState('App-logo');
+    const [display, setDisplay] = useState(initImage);
+    const [displayStyle, setDisplayStyle] = useState('init-style');
     const [zooms, setZooms] = useState([]);
     const [topLeftX, setTopLeftX] = useState([0]);
     const [topLeftY, setTopLeftY] = useState([0]);
@@ -44,12 +44,20 @@ const Home = () => {
     const handleMouseDown = (event) => {
         event.preventDefault();
 
+        if (zooms.length == 0) {
+            return;
+        }
+
         topLeftX[0] = event.nativeEvent.offsetX;
         topLeftY[0] = event.nativeEvent.offsetY;
     }
 
     const handleMouseRelease = (event) => {
         event.preventDefault();
+
+        if (zooms.length == 0) {
+            return;
+        }
 
         bottomRightX[0] = event.nativeEvent.offsetX;
         bottomRightY[0] = event.nativeEvent.offsetY;
@@ -85,7 +93,7 @@ const Home = () => {
         axios.get(zoomUrl, config)
         .then(function(response) {
             setDisplay(`data:image/jpg;base64,${response.data.encodedImage}`);
-            setDisplayClass('fractal-display');
+            setDisplayStyle('fractal-display');
 
             const newZooms= zooms.slice();
             var newZoom = response.data.zoom;
@@ -122,7 +130,7 @@ const Home = () => {
         axios.get(zoomUrl, config)
         .then(function(response) {
             setDisplay(`data:image/jpg;base64,${response.data.encodedImage}`);
-            setDisplayClass('fractal-display');
+            setDisplayStyle('fractal-display');
 
             setMinr([response.data.zoom.realMin]);
             setMaxr([response.data.zoom.realMax]);
@@ -149,16 +157,9 @@ const Home = () => {
                     <label>Latest</label>
                 </div>
 
-                <div>
-                    <p>To generate the full Mandelbrot Set click the begin button above. Then use your mouse to zoom in.</p>
-                    It can take upto 10 seconds to generate the image.
-
-                    <p>Use the radio buttons to select your color scheme.</p>
-                </div>
-
                 <div id="mandelbrot-wrapper">
                     <div id="fractal-wrapper">
-                        <img src={display} className={displayClass} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
+                        <img src={display} className={displayStyle} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
                     </div>
                     {zooms.length > 0 && <ZoomPanel zooms={zooms} reload={reloadZoom} />}
                 </div>

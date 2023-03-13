@@ -1,16 +1,15 @@
 import { useOktaAuth } from '@okta/okta-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import initImage from './init-image.jpg';
 import NavBar from './NavBar';
-import ZoomPanel from './ZoomPanel';
+import GeneratorPanel from './GeneratorPanel';
+import IntroPanel from './IntroPanel';
 
 const Home = () => {
 
     const { authState, oktaAuth } = useOktaAuth();
     const [accessToken, setAccessToken] = useState(null);
-    const [display, setDisplay] = useState(initImage);
-    const [displayStyle, setDisplayStyle] = useState('init-style');
+    const [display, setDisplay] = useState(null);
     const [zooms, setZooms] = useState([]);
     const [topLeftX, setTopLeftX] = useState([0]);
     const [topLeftY, setTopLeftY] = useState([0]);
@@ -44,20 +43,12 @@ const Home = () => {
     const handleMouseDown = (event) => {
         event.preventDefault();
 
-        if (zooms.length == 0) {
-            return;
-        }
-
         topLeftX[0] = event.nativeEvent.offsetX;
         topLeftY[0] = event.nativeEvent.offsetY;
     }
 
     const handleMouseRelease = (event) => {
         event.preventDefault();
-
-        if (zooms.length == 0) {
-            return;
-        }
 
         bottomRightX[0] = event.nativeEvent.offsetX;
         bottomRightY[0] = event.nativeEvent.offsetY;
@@ -93,7 +84,6 @@ const Home = () => {
         axios.get(zoomUrl, config)
         .then(function(response) {
             setDisplay(`data:image/jpg;base64,${response.data.encodedImage}`);
-            setDisplayStyle('fractal-display');
 
             const newZooms= zooms.slice();
             var newZoom = response.data.zoom;
@@ -125,12 +115,11 @@ const Home = () => {
         params.append('mini', oldZoom.imaginaryMin);
         params.append('maxi', oldZoom.imaginaryMax);
 
-        var zoomUrl = 'http://localhost:8080/api/reload?' + params.toString();
+        var zoomUrl = 'http://localhost:8080/api/save?' + params.toString();
 
         axios.get(zoomUrl, config)
         .then(function(response) {
             setDisplay(`data:image/jpg;base64,${response.data.encodedImage}`);
-            setDisplayStyle('fractal-display');
 
             setMinr([response.data.zoom.realMin]);
             setMaxr([response.data.zoom.realMax]);
@@ -150,12 +139,9 @@ const Home = () => {
                     Create your own beautiful and unique art.
                 </div>
 
-                <div id="mandelbrot-wrapper">
-                    <div id="fractal-wrapper">
-                        <img src={display} className={displayStyle} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
-                    </div>
-                    {zooms.length > 0 && <ZoomPanel zooms={zooms} reload={reloadZoom} />}
-                </div>
+                {zooms.length > 0 && <GeneratorPanel zooms={zooms} handleMouseDown={handleMouseDown} handleMouseRelease={handleMouseRelease} zoom={zoom} reloadZoom={reloadZoom} display={display} />}
+                {zooms.length== 0 && <IntroPanel />}
+
                 <div id="control-panel">
                     <div>
                         <button onClick={zoom}>Begin</button>

@@ -2,7 +2,7 @@ import { useOktaAuth } from '@okta/okta-react';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
-import ZoomCard from './ZoomCard';
+import ZoomPanel from './ZoomPanel';
 
 const Home = () => {
 
@@ -62,25 +62,6 @@ const Home = () => {
         zoom();
     }
 
-    const zoomPanelStyle = () => {
-
-        return zooms.length ? 'with-zooms' : 'without-zooms';
-    }
-
-    const buildAZoom = (zoom) => {
-
-        return (
-            <div className="zoom-wrapper" key={zooms.length} onClick={() => reloadZoom(zoom)}>
-                <div className="zoom-index">{zooms.length}.</div>
-                <div className="zoom-card">
-                    <div className="zoom-card-name">{zoom.name}</div>
-                    <div className="zoom-card-real">{zoom.realMin} to {zoom.realMax}</div>
-                    <div className="zoom-card-imaginary">{zoom.imaginaryMin} to {zoom.imaginaryMax}</div>
-                </div>
-            </div>
-        );
-    }
-
     const zoom = () => {
 
         const config = {
@@ -112,7 +93,9 @@ const Home = () => {
             setDisplayClass('fractal-display');
 
             const newZooms= zooms.slice();
-            newZooms.push(buildAZoom(response.data.zoom));
+            var newZoom = response.data.zoom;
+            newZoom.index = zooms.length + 1;
+            newZooms.push(newZoom);
             setZooms(newZooms);
             setMinr([response.data.zoom.realMin]);
             setMaxr([response.data.zoom.realMax]);
@@ -183,11 +166,7 @@ const Home = () => {
                     <div id="fractal-wrapper">
                         <img src={display} className={displayClass} alt="logo" onMouseDown={handleMouseDown} onMouseUp={handleMouseRelease} />
                     </div>
-                    <div id="zooms-panel-wrapper">
-                        <div id="zooms-panel" className={zoomPanelStyle()}>
-                            {zooms}
-                        </div>
-                    </div>
+                    {zooms.length > 0 && <ZoomPanel zooms={zooms} reload={reloadZoom} />}
                 </div>
             </div>
         </div>

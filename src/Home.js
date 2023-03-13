@@ -149,9 +149,9 @@ const Home = () => {
             <div className="generator-display">
                 <button onClick={zoom}>Begin</button>
                 <div>
-                    <input type="radio" value="og" checked={ogScheme} onClick={() => setOgScheme(true)} />
+                    <input type="radio" value="og" checked={ogScheme} onChange={() => setOgScheme(!ogScheme)} />
                     <label>OG</label>
-                    <input type="radio" value="latest" checked={!ogScheme} onClick={() => setOgScheme(false)} />
+                    <input type="radio" value="latest" checked={!ogScheme} onChange={() => setOgScheme(!ogScheme)} />
                     <label>Latest</label>
                 </div>
 

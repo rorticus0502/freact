@@ -1,4 +1,5 @@
 import { useOktaAuth } from '@okta/okta-react';
+import logo from './vsm-icon.jpg';
 
 const NavBar = () => {
 
@@ -9,9 +10,12 @@ const NavBar = () => {
     return (
 
         <div id="navbar">
+            <div id="nav-logo">
+                <img src={logo} />
+            </div>
             <div id="app-title">FractalArt</div>
-            <button className="first-nav-btn">Gallery</button>
-            <button onClick={logout}>Logout</button>
+            <a className="first-nav-btn">Gallery</a>
+            <a onClick={logout}>Logout</a>
         </div>
 
     );

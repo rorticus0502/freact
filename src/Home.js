@@ -117,7 +117,7 @@ const Home = () => {
         params.append('mini', oldZoom.imaginaryMin);
         params.append('maxi', oldZoom.imaginaryMax);
 
-        var zoomUrl = 'http://localhost:8080/api/reload?' + params.toString();
+        var zoomUrl = 'http://localhost:8080/api/save?' + params.toString();
 
         axios.get(zoomUrl, config)
         .then(function(response) {

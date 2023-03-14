@@ -19,8 +19,8 @@
 }
 
 .init-style {
-  height: 600px;
-  width: 800px;
+  height: 60vh;
+  width: 80vh;
 }
 
 #intro-wrapper {
@@ -35,7 +35,7 @@
     margin: auto;
     border: 4px solid #ffc107;
     border-radius: 8px;
-    height: 600px;
+    height: 60vh;
     max-width: 15%;
     font-size: 1.5rem;
     font-family: serif;

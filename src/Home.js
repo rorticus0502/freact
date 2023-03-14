@@ -147,12 +147,20 @@ const Home = () => {
                         <button onClick={zoom}>Begin</button>
                     </div>
                     <div>
-                        <input type="radio" value="og" checked={ogScheme} onChange={() => setOgScheme(!ogScheme)} />
-                        <label>OG</label>
+                        <div>
+                            <label>Original</label>
+                        </div>
+                        <div>
+                            <input type="radio" value="og" checked={ogScheme} onChange={() => setOgScheme(!ogScheme)} />
+                        </div>
                     </div>
                     <div>
-                        <input type="radio" value="latest" checked={!ogScheme} onChange={() => setOgScheme(!ogScheme)} />
-                        <label>Latest</label>
+                        <div>
+                            <label>Latest</label>
+                        </div>
+                        <div>
+                            <input type="radio" value="latest" checked={!ogScheme} onChange={() => setOgScheme(!ogScheme)} />
+                        </div>
                     </div>
                 </div>
             </div>

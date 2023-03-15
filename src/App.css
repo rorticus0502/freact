@@ -222,6 +222,19 @@ button {
     .App-header {
       padding-top: 3px;
     }
+
+    .intro-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        border: 1px solid #ffc107;
+        border-radius: 8px;
+        height: 60vh;
+        max-width: 20%;
+        font-size: 0.8rem;
+        font-family: serif;
+    }
 }
 
 @media screen and (max-width : 400px) {

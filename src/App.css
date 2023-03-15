@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+button {
+    cursor: pointer;
+}
+
 .App-logo {
   height: 300px;
   width: 300px;
@@ -187,4 +191,45 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@media screen and (max-width : 900px) {
+
+    .not-mobile {
+        display: none;
+    }
+
+    .init-style {
+      height: 60vh;
+      width: 80vh;
+    }
+
+    #navbar {
+        display: flex;
+        background-color: #00E6E6FF;
+        font-family: monospace;
+        font-size: 1rem;
+        color: #282c34;
+    }
+}
+
+@media screen and (max-width : 400px) {
+
+    .not-mobile {
+        display: none;
+    }
+
+    .init-style {
+      height: 285px;
+      width: 380px;
+    }
+
+    #navbar {
+        display: flex;
+        flex-direction: column;
+        background-color: #00E6E6FF;
+        font-family: monospace;
+        font-size: 1rem;
+        color: #282c34;
+    }
 }

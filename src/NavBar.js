@@ -10,11 +10,11 @@ const NavBar = () => {
     return (
 
         <div id="navbar">
-            <div id="nav-logo">
-                <img src={logo} />
+            <div id="nav-logo" className="not-mobile">
+                <img src={logo} className="not-mobile"/>
             </div>
             <div id="app-title">FractalArt</div>
-            <a className="first-nav-btn">Gallery</a>
+            <a className="first-nav-btn not-mobile">Gallery</a>
             <a onClick={logout}>Logout</a>
         </div>
 

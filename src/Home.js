@@ -34,7 +34,7 @@ const Home = () => {
     if (!accessToken) {
         return (
             <div>
-                <p>Hey</p>
+                <p>Yo</p>
                 <button onClick={login}>Click to Login</button>
             </div>
         );
@@ -135,7 +135,7 @@ const Home = () => {
         <div className="App-header">
             <NavBar />
             <div className="generator-display">
-                <div className="tagline">
+                <div className="tagline not-mobile">
                     Create your own beautiful and unique art.
                 </div>
 

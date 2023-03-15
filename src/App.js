@@ -13,10 +13,10 @@ const oktaAuth = new OktaAuth({
 
 export default function App(props)  {
 
-    const navigate = useNavigate();
-      const restoreOriginalUri = async (_oktaAuth, originalUri) => {
-        navigate('/');
-      };
+  const navigate = useNavigate();
+  const restoreOriginalUri = async (_oktaAuth, originalUri) => {
+    navigate('/');
+  };
 
   return (
     <div className="App">

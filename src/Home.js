@@ -21,8 +21,6 @@ const Home = () => {
     const [maxi, setMaxi] = useState([1.5]);
     const [ogScheme, setOgScheme] = useState(false);
 
-    const login = async () => oktaAuth.signInWithRedirect();
-
     useEffect(() => {
 
         if (authState && authState.isAuthenticated) {
@@ -30,15 +28,6 @@ const Home = () => {
         }
 
     }, [authState, setAccessToken]);
-
-    if (!accessToken) {
-        return (
-            <div>
-                <p>Yo</p>
-                <button onClick={login}>Click to Login</button>
-            </div>
-        );
-    }
 
     const handleMouseDown = (event) => {
         event.preventDefault();

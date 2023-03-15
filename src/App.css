@@ -6,12 +6,6 @@ button {
     cursor: pointer;
 }
 
-.App-logo {
-  height: 300px;
-  width: 300px;
-  pointer-events: none;
-}
-
 #nav-logo {
     display: flex;
     flex-direction: column;
@@ -205,17 +199,34 @@ button {
     }
 
     #navbar {
-        display: flex;
+        min-height: 5vh;
+        display: grid;
+        grid-template-columns:  8% 12% repeat(8, 10%);
         background-color: #00E6E6FF;
         font-family: monospace;
         font-size: 1rem;
         color: #282c34;
     }
+
+    #nav-logo {
+    }
+
+    #navbar #app-title {
+        grid-column-start: 5;
+        grid-column-end: 7;
+        font-size: 1.5rem;
+        font-family: monospace;
+        display: flex;
+    }
+
+    .App-header {
+      padding-top: 3px;
+    }
 }
 
 @media screen and (max-width : 400px) {
 
-    .not-mobile {
+    .not-mobile, .ls-only {
         display: none;
     }
 

@@ -23,6 +23,9 @@ const Display = () => {
     const [mini, setMini] = useState([-1.5]);
     const [maxi, setMaxi] = useState([1.5]);
 
+    const [screenWidth, setScreenWidth] = useState([1200]);
+    const [screenHeight, setScreenHeight] = useState([900]);
+
     const [ogScheme, setOgScheme] = useState(false);
 
     useEffect(() => {
@@ -54,6 +57,9 @@ const Display = () => {
         params.append('maxr', maxr[0]);
         params.append('mini', mini[0]);
         params.append('maxi', maxi[0]);
+
+        params.append('width', screenWidth[0]);
+        params.append('height', screenHeight[0]);
 
         if(ogScheme) {
             params.append('og', true);
@@ -177,15 +183,24 @@ const Display = () => {
     const handleTouchStart = (event) => {
         event.preventDefault();
 
-        topLeftX[0] = event.nativeEvent.offsetX;
-        topLeftY[0] = event.nativeEvent.offsetY;
+        screenWidth[0] = event.target.width;
+        screenHeight[0] = event.target.height;
+
+        console.log(event.touches[0].clientX - event.target.x);
+        console.log(event.touches[0].clientY - event.target.y);
+
+        topLeftX[0] = event.touches[0].clientX - event.target.x;
+        topLeftY[0] = event.touches[0].clientY - event.target.y;
     }
 
     const handleTouchEnd = (event) => {
         event.preventDefault();
 
-        bottomRightX[0] = event.nativeEvent.offsetX;
-        bottomRightY[0] = event.nativeEvent.offsetY;
+        console.log(event.changedTouches[0].clientX - event.target.x);
+        console.log(event.changedTouches[0].clientY - event.target.y);
+
+        bottomRightX[0] = event.changedTouches[0].clientX - event.target.x;
+        bottomRightY[0] = event.changedTouches[0].clientY - event.target.y;
 
         zoom();
     }

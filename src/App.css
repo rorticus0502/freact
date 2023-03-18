@@ -234,6 +234,7 @@ button {
     .fractal-display {
       height: 75vh;
       width: 100vh;
+      touch-action: none;
     }
 }
 

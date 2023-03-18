@@ -11,6 +11,10 @@ const GeneratorPanel = ({
     }) => {
 
 
+    const handleTouchMove = (event) => {
+        event.preventDefault();
+    }
+
     return (
 
         <div id="mandelbrot-wrapper">
@@ -21,6 +25,7 @@ const GeneratorPanel = ({
                     onMouseDown={handleMouseDown}
                     onMouseUp={handleMouseRelease}
                     onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
                     onTouchEnd={handleTouchEnd}
                 />
             </div>

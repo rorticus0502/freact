@@ -47,9 +47,12 @@ const Home = () => {
 
     const zoom = () => {
 
-        const config = {
-            headers: {
-                Authorization: 'Bearer ' + accessToken
+        var config;
+        if (accessToken) {
+            config = {
+                headers: {
+                    Authorization: 'Bearer ' + accessToken
+                }
             }
         }
 
@@ -68,7 +71,7 @@ const Home = () => {
             params.append('og', true);
         }
 
-        var zoomUrl = 'http://localhost:8080/api/zoom?' + params.toString();
+        var zoomUrl = 'http://192.168.0.123:8080/api/zoom?' + params.toString();
 
         axios.get(zoomUrl, config)
         .then(function(response) {

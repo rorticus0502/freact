@@ -16,12 +16,12 @@ button {
   width: 1200px;
 }
 
-.init-style {
+ .init-style {
   height: 60vh;
   width: 80vh;
 }
 
-#intro-wrapper {
+#intro-wrapper, #mandelbrot-wrapper {
     display: flex;
     align-content: center;
 }
@@ -51,15 +51,6 @@ button {
     font-family: math;
 }
 
-#mandelbrot-wrapper {
-
-    display: grid;
-    grid-row-gap: 20px;
-    max-width: 94%;
-    margin: 20px auto;
-
-}
-
 #fractal-wrapper {
     grid-row-start: 2;
     grid-column-start: 1;
@@ -75,6 +66,7 @@ button {
     border: 3px solid #ffc107;
     border-radius: 6px;
     padding: 10px 25px 0px 10px;
+    margin: 0 0 0 15px;
 }
 
 .zoom-wrapper {
@@ -155,13 +147,12 @@ button {
   align-items: center;
   justify-content: flex-start;
   color: white;
-  margin-top: 20px;
 }
 
 .tagline {
     font-family: serif;
     font-size: 2rem;
-    margin: 50px 0;
+    margin: 10px 0;
 }
 
 #control-panel {
@@ -234,6 +225,15 @@ button {
         max-width: 20%;
         font-size: 0.8rem;
         font-family: serif;
+    }
+
+    .generator-display {
+        margin-top: 10px ;
+    }
+
+    .fractal-display {
+      height: 75vh;
+      width: 100vh;
     }
 }
 

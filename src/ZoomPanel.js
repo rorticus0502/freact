@@ -1,11 +1,15 @@
-const ZoomPanel = ({zooms, reload}) => {
+const ZoomPanel = ({zooms, reload, download}) => {
 
     const zoomElements = zooms.map(zoom =>
 
-        <div className="zoom-wrapper" key={zoom.index} onClick={() => reload(zoom)}>
+        <div className="zoom-wrapper" key={zoom.index}>
             <div className="zoom-index">{zoom.index}.</div>
             <div className="zoom-card">
-                <div className="zoom-card-name">{zoom.name}</div>
+                <div className="zoom-card-header">
+                    <button onClick={() => reload(zoom)}>reload</button>
+                    <div className="zoom-card-name">{zoom.name}</div>
+                    <button onClick={() => download(zoom)}>save</button>
+                </div>
                 <div className="zoom-card-real">{zoom.realMin} to {zoom.realMax}</div>
                 <div className="zoom-card-imaginary">{zoom.imaginaryMin} to {zoom.imaginaryMax}</div>
             </div>

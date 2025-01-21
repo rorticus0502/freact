@@ -94,7 +94,13 @@ button {
     grid-row-end: 4;
     padding: 3px 10px;
     color: #0d6efd;
+    min-width: 300px;
 
+}
+
+.zoom-card-header {
+    display: flex;
+    justify-content: space-between;
 }
 
 @media (prefers-reduced-motion: no-preference) {

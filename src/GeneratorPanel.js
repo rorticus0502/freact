@@ -7,7 +7,7 @@ const GeneratorPanel = ({
             handleMouseRelease,
             handleTouchStart,
             handleTouchEnd,
-            reloadZoom
+            reloadZoom, downloadZoom
     }) => {
 
 
@@ -29,7 +29,7 @@ const GeneratorPanel = ({
                     onTouchEnd={handleTouchEnd}
                 />
             </div>
-            {zooms.length > 0 && <ZoomPanel zooms={zooms} reload={reloadZoom} />}
+            {zooms.length > 0 && <ZoomPanel zooms={zooms} reload={reloadZoom} download={downloadZoom}/>}
         </div>
     );
 };

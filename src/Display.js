@@ -116,6 +116,46 @@ const Display = () => {
         });
     }
 
+    const downloadZoom = (oldZoom) => {
+
+        var config;
+
+        if (accessToken) {
+            config = {
+                headers: {
+                    Authorization: 'Bearer ' + accessToken
+                }
+            }
+        }
+
+        var params = new URLSearchParams();
+
+        params.append('minr', oldZoom.realMin);
+        params.append('maxr', oldZoom.realMax);
+        params.append('mini', oldZoom.imaginaryMin);
+        params.append('maxi', oldZoom.imaginaryMax);
+
+        var zoomUrl = 'http://localhost:8080/api/download?' + params.toString();
+
+        axios.get(zoomUrl, {responseType: 'blob'})
+        .then(function(response) {
+
+                const url = window.URL.createObjectURL(response.data);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                // the filename you want
+                a.download = `freact.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+    }
+
     const fingerZoom = () => {
 
         var config;
@@ -211,7 +251,7 @@ const Display = () => {
                                             handleMouseRelease={handleMouseRelease}
                                             handleTouchStart={handleTouchStart}
                                             handleTouchEnd={handleTouchEnd}
-                                            reloadZoom={reloadZoom} />}
+                                            reloadZoom={reloadZoom} downloadZoom = {downloadZoom} />}
                 {zooms.length === 0 && <IntroPanel />}
 
                 <div id="control-panel">

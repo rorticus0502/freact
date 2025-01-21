@@ -23,9 +23,6 @@ const Display = () => {
     const [mini, setMini] = useState([-1.5]);
     const [maxi, setMaxi] = useState([1.5]);
 
-    const [screenWidth, setScreenWidth] = useState([1200]);
-    const [screenHeight, setScreenHeight] = useState([900]);
-
     const [ogScheme, setOgScheme] = useState(false);
 
     useEffect(() => {
@@ -58,14 +55,12 @@ const Display = () => {
         params.append('mini', mini[0]);
         params.append('maxi', maxi[0]);
 
-        params.append('width', screenWidth[0]);
-        params.append('height', screenHeight[0]);
-
         if(ogScheme) {
             params.append('og', true);
         }
 
-        var zoomUrl = 'http://192.168.0.123:8080/api/zoom?' + params.toString();
+//        var zoomUrl = 'http://192.168.0.123:8080/api/zoom?' + params.toString();
+        var zoomUrl = 'http://localhost:8080/api/zoom?' + params.toString();
 
         axios.get(zoomUrl, config)
         .then(function(response) {
@@ -88,9 +83,13 @@ const Display = () => {
 
     const reloadZoom = (oldZoom) => {
 
-        const config = {
-            headers: {
-                Authorization: 'Bearer ' + accessToken
+        var config;
+
+        if (accessToken) {
+            config = {
+                headers: {
+                    Authorization: 'Bearer ' + accessToken
+                }
             }
         }
 
@@ -101,7 +100,7 @@ const Display = () => {
         params.append('mini', oldZoom.imaginaryMin);
         params.append('maxi', oldZoom.imaginaryMax);
 
-        var zoomUrl = 'http://localhost:8080/api/save?' + params.toString();
+        var zoomUrl = 'http://localhost:8080/api/reload?' + params.toString();
 
         axios.get(zoomUrl, config)
         .then(function(response) {
@@ -143,7 +142,8 @@ const Display = () => {
             params.append('og', true);
         }
 
-        var zoomUrl = 'http://192.168.0.123:8080/api/zoom?' + params.toString();
+//        var zoomUrl = 'http://192.168.0.123:8080/api/zoom?' + params.toString();
+        var zoomUrl = 'http://localhost:8080/api/zoom?' + params.toString();
 
         axios.get(zoomUrl, config)
         .then(function(response) {
@@ -182,9 +182,6 @@ const Display = () => {
 
     const handleTouchStart = (event) => {
         event.preventDefault();
-
-        screenWidth[0] = event.target.width;
-        screenHeight[0] = event.target.height;
 
         console.log(event.touches[0].clientX - event.target.x);
         console.log(event.touches[0].clientY - event.target.y);
